@@ -1,0 +1,122 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" 
+        rel="stylesheet" 
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" 
+        crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script type="module" src="./index.js"></script>
+    <script type="module" src="./data.js"></script>
+    <script type="module" src="./task.js"></script>
+    <title>ToDo App</title>
+</head>
+<body class="bg-light">
+    <h1 class="text-center bg-primary text-light">ToDo App</h1>
+    <div class="container">
+        <div>
+            <label for="id" class="form-label">ID</label>
+            <input type="text" class="form-control" id="id">
+        </div>
+        <div>
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name">
+        </div>
+        <div>
+            <label for="desc" class="form-label">Description</label>
+            <textarea class="form-control" rows="2" id="desc"></textarea>
+        </div>
+        <div>
+            <label for="date" class="form-label">Date</label>
+            <input type="date" class="form-control" id="date" value="2003-10-27">
+        </div>
+        <div>
+            <label for="color" class="form-label">Color</label>
+            <input type="color" class="form-control formm-control-color" id="color">
+        </div>
+        <div>
+            <label for="url" class="form-label">URL</label>
+            <input type="url" class="form-control" id="url">
+        </div>
+        <div>
+            <label for="status" class="form-label">Status</label>
+            <br>
+            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                <input type="radio" class="btn-check" name="btnradio" id="Pending" autocomplete="off">
+                <label class="btn btn-outline-danger" for="Pending"><i class="fa-solid fa-xmark"></i></label>
+                <input type="radio" class="btn-check" name="btnradio" id="Done" autocomplete="off">
+                <label class="btn btn-outline-success" for="Done"><i class="fa-solid fa-check"></i></label>
+                <input type="radio" class="btn-check" name="btnradio" id="None" autocomplete="off">
+                <label class="btn btn-outline-warning" for="None"><i class="fa-solid fa-check"></i></label>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="container">
+        <button id="Add" class="btn btn-primary">Add <i class="fa-solid fa-file-circle-plus"></i></button>
+        <button id="Delete" class="btn btn-danger">Delete <i class="fa-solid fa-eraser"></i></button>
+        <button id="Save" class="btn btn-success">Save <i class="fa-solid fa-upload"></i></button>
+        <button id="Load" class="btn btn-warning">Load <i class="fa-solid fa-download"></i></button>
+        <button id="Update" class="btn btn-info">Update <i class="fa-solid fa-file-pen"></i></button>
+        <button id="Search" type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#searchbox">Search <i class="fa-solid fa-magnifying-glass"></i></button>
+        <button id="Clear" class="btn btn-danger">Clear All <i class="fa-solid fa-trash"></i></button>
+        <button id="All" class="btn btn-primary">All <i class="fa-solid fa-recycle"></i></button>
+    </div>
+    <br>
+    <div>
+        <table class="container table table-bordered">
+            <thead>
+                <tr class="table-dark">
+                    <th>Serial</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Desc</th>
+                    <th>Date</th>
+                    <th>Color</th>
+                    <th>Url</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody class="table-warning" id="tasks">
+
+            </tbody>
+        </table>
+    </div>
+    <div class="modal fade" id="searchbox" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Search Box</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group mb-3">
+                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="Dropdown">Key</button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" name="ID" id="D1">ID</a></li>
+                      <li><a class="dropdown-item" name="Name" id="D2">Name</a></li>
+                      <li><a class="dropdown-item" name="Desc" id="D3">Desc</a></li>
+                      <li><a class="dropdown-item" name="Color" id="D4">Color</a></li>
+                      <li><a class="dropdown-item" name="Status" id="D5">Status</a></li>
+                      <li><a class="dropdown-item" name="Status" id="D6">Date</a></li>
+                    </ul>
+                    <input id="searchtext" type="text" class="form-control" aria-label="Text input with dropdown button">
+                  </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <!-- <button type="button" class="btn btn-primary" id="search">Search</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+</body>
+</html>
