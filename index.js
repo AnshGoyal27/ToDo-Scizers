@@ -1,5 +1,6 @@
 import task from "./task.js";
 import {data} from "./data.js";
+
 window.addEventListener("load",start);
 function start(){
     console.log("Called start");
@@ -12,8 +13,30 @@ function start(){
     document.querySelector('#Clear').addEventListener('click',clear);
     document.querySelector('#All').addEventListener('click',()=>printtable(data.tasks));
     document.querySelector("#searchtext").addEventListener('input',gosearch);
+    document.querySelector("#id").addEventListener('input',checkId);
 }
-var indexo=0;
+// var indexo=0;
+
+function checkId(){
+    const id = document.querySelector("#id").value;
+    console.log(id);
+    document.getElementById("Add").disabled = true;
+    let bool = true;
+    if(id===""){
+        return;
+    }
+    else{
+        for(let i in data.tasks){
+            if(data.tasks[i]["id"]===id){
+                bool = false;
+            }
+        }
+        if(bool===true){
+            document.querySelector("#Add").disabled = false;
+        }
+    }
+}
+
 function add(){
     console.log("Called add");
     let newTask=new task;
