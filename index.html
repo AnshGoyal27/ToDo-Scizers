@@ -21,6 +21,18 @@
 </head>
 <body class="bg-light">
     <h1 class="text-center bg-primary text-light">ToDo App</h1>
+    <div class="container" >
+        <div>
+            <label for="user" class="form-label">User</label>
+            <div class="input-group" >
+                <button class="btn btn-outline-secondary" type="button" id="userDE">SET</button>
+                <input type="text" class="form-control" id="user">
+            </div>
+        </div>
+    </div>  
+    &nbsp;
+    <div class="container" id="registered" >
+    </div>
     <div class="container">
         <div>
             <label for="id" class="form-label">ID</label>
@@ -63,12 +75,14 @@
     <div class="container">
         <button id="Add" class="btn btn-primary" disabled >Add <i class="fa-solid fa-file-circle-plus" ></i></button>
         <button id="Delete" class="btn btn-danger">Delete <i class="fa-solid fa-eraser"></i></button>
-        <button id="Save" class="btn btn-success">Save <i class="fa-solid fa-upload"></i></button>
-        <button id="Load" class="btn btn-warning">Load <i class="fa-solid fa-download"></i></button>
+        <button id="Save" class="btn btn-success">Save User <i class="fa-solid fa-upload"></i></button>
+        <button id="Load" class="btn btn-warning">Load User <i class="fa-solid fa-download"></i></button>
         <button id="Update" class="btn btn-info">Update <i class="fa-solid fa-file-pen"></i></button>
         <button id="Search" type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#searchbox">Search <i class="fa-solid fa-magnifying-glass"></i></button>
         <button id="Clear" class="btn btn-danger">Clear All <i class="fa-solid fa-trash"></i></button>
         <button id="All" class="btn btn-primary">All <i class="fa-solid fa-recycle"></i></button>
+        <button id="SaveComplete" class="btn btn-success">Save <i class="fa-solid fa-upload"></i></button>
+        <button id="LoadComplete" class="btn btn-warning">Load <i class="fa-solid fa-download"></i></button>
     </div>
     <br>
     <div>

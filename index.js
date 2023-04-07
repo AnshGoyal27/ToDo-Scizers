@@ -1,5 +1,6 @@
 import task from "./task.js";
 import {data} from "./data.js";
+import { users } from "./data.js";
 
 window.addEventListener("load",start);
 function start(){
@@ -8,14 +9,88 @@ function start(){
     document.querySelector('#Delete').addEventListener('click',dlt);
     document.querySelector('#Save').addEventListener('click',save);
     document.querySelector('#Load').addEventListener('click',load);
+    document.querySelector('#SaveComplete').addEventListener('click',saveAll);
+    document.querySelector('#LoadComplete').addEventListener('click',loadAll);
     document.querySelector('#Update').addEventListener('click',update);
     document.querySelector('#Search').addEventListener('click',search);
     document.querySelector('#Clear').addEventListener('click',clear);
     document.querySelector('#All').addEventListener('click',()=>printtable(data.tasks));
     document.querySelector("#searchtext").addEventListener('input',gosearch);
     document.querySelector("#id").addEventListener('input',checkId);
+    document.getElementById('user').addEventListener('input',clearData);
+    document.getElementById('userDE').addEventListener('click',userDE);
 }
-// var indexo=0;
+
+function userDE(){
+    const DEbtn = document.getElementById('userDE');
+    const userInput = document.getElementById('user');
+    if(userInput.value===""){
+        alert("Empty User");
+    }
+    else{
+        if(userInput.disabled){
+            DEbtn.innerText = "SET";
+            userInput.disabled = false;
+        }
+        else{
+            DEbtn.innerText = "EDIT";
+            userInput.disabled = true;
+        }
+    }
+}
+
+function clearData(){
+    data.tasks.length = 0;
+    document.getElementById('id').value = "";
+    document.getElementById('name').value = "";
+    document.getElementById('desc').value = "";
+    document.getElementById('color').value = "#000000";
+    document.getElementById('date').value = "2003-10-27";
+    document.getElementById('url').value = "";
+    document.getElementById('Done').checked = false;
+    document.getElementById('Pending').checked = false;
+    document.getElementById('None').checked = false;
+    printtable(data.tasks);
+}
+
+function save(){
+    const presentUser = document.getElementById('user').value;
+    if(presentUser===""){
+        alert("Please enter User Value");
+        return;
+    }
+    if(!document.getElementById('user').disabled){
+        alert("Please set the user");
+        return;
+    }
+    if(!Object.keys(users).includes(presentUser)){
+        let btn=document.createElement('button');
+        btn.innerText = presentUser;
+        btn.id = presentUser;
+        btn.className = 'btn btn-dark m-1';
+        btn.onclick = ()=>{
+            document.getElementById('user').value = btn.innerText;
+        }
+        document.getElementById('registered').appendChild(btn);
+    }
+    users[presentUser] = [];
+    data.tasks.forEach((ele)=>{
+        users[presentUser].push(ele);
+    })
+    console.log(users);
+}
+
+function load(){
+    const presentUser = document.getElementById('user').value
+    if(presentUser===""){
+        alert("Please enter User Value");
+        return;
+    }
+    console.log(users[presentUser]);
+    data.tasks = users[presentUser];
+    console.log(data.tasks);
+    printtable(data.tasks);
+}
 
 function checkId(){
     const id = document.querySelector("#id").value;
@@ -60,6 +135,7 @@ function add(){
         }
     }
     data.tasks.push(newTask);
+    document.getElementById("Add").disabled = true;
     printtask(newTask);
 }
 function radioclick(){
@@ -109,9 +185,9 @@ function dlt(){
     printtable(data.tasks);
 }
 
-function save(){
+function saveAll(){
     if(window.localStorage){
-        localStorage.mytaskdata = JSON.stringify(data.tasks);
+        localStorage.mytaskdata = JSON.stringify(users);
         alert("Data Saved...");
       }
       else{
@@ -119,12 +195,21 @@ function save(){
       }
 }
 
-function load(){
+function loadAll(){
     if(window.localStorage){
         if(localStorage.mytaskdata){
           const allTask = JSON.parse(localStorage.mytaskdata);
-          printtable(allTask);
-          data.tasks=allTask;
+          Object.keys(allTask).forEach((ele)=>{
+            users[ele] = allTask[ele];
+            let btn=document.createElement('button');
+            btn.innerText = ele;
+            btn.id = ele;
+            btn.className = 'btn btn-dark m-1';
+            btn.onclick = ()=>{
+                document.getElementById('user').value = btn.innerText;
+            }
+            document.getElementById('registered').appendChild(btn);
+          })
         }
         else{
           alert("U Don't Have any data to load...");
